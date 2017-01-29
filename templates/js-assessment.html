@@ -41,13 +41,10 @@
 
   var button = document.getElementById('change-hello-to-goodbye-button');
 
-  function changeText() {
-       document.getElementById('message-to-change').style = "font-weight: bold";
-  }
-
-  button.addEventListener('click', changeText);
-
-
+  button.addEventListener('click', function() {
+    var message = document.getElementById('message-to-change');
+    message.innerHTML = "Goodbye";
+  });
 
 </script>
 
@@ -208,7 +205,6 @@
   var random = 0;
   function randomNumber() {
     random = Math.floor((Math.random() * 100) + 1).toString();
-    console.dir(random);
   }
 
   guessButton.click(evaluateGuess);
@@ -216,13 +212,13 @@
   function evaluateGuess(evt) {
     evt.preventDefault();
     var guess = $("#number-guessed");
-    console.dir(guess.val())
     if (guess.val() === random) {
       message.html("Congrats; you picked the correct number");
       guessButton.prop("disabled", true);
       playButton.prop("disabled", false);
     }
-    else {message.html("Guess again");
+    else {
+      message.html("Guess again");
     };
   };
 
@@ -294,7 +290,7 @@
   $("#Attack").click(function(evt) {
     evt.preventDefault();
 
-    var victim = {"victim-name": $("#victim-name").val()};
+    var victim = { "victim-name": $("#victim-name").val() };
 
     $.post('/t-rex-attack.json', 
             victim,
